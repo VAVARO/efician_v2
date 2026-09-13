@@ -1,4 +1,4 @@
-﻿# Capturas de pantalla de testing y desarrollo UI
+# Capturas de pantalla de testing y desarrollo UI
 shot_*.png
 chrome_shot*.png
 full_page.png
@@ -18,3 +18,14 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# Archivos temporales de desarrollo y pruebas
+claude_artifact_*
+claude_thumb.png
+extracted_artifact_assets/
+index_backup.html
+kitsolares_home.html
+scratch_artifact_script.js
+style_*.css
+test_*.html
+logo-efician.webp
