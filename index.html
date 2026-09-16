@@ -19,7 +19,7 @@
   <!-- Tipografía Web Complementaria (Plus Jakarta Sans + Inter + DM Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@200;300;400;500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@200;300;400;500&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet" />
   
   <!-- SheetJS (xlsx) para Exportación Nativa de Prospectos a Microsoft Excel (.xlsx) -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -50,9 +50,10 @@
             'emerald-save': '#10B981'
           },
           fontFamily: {
-            balgin: ['"BalginExtraLight"', '"Plus Jakarta Sans"', 'sans-serif'],
-            headline: ['"Plus Jakarta Sans"', 'sans-serif'],
-            body: ['"Inter"', 'sans-serif'],
+            candara: ['"Candara"', '"Candara Light"', '"Cantarell"', 'Calibri', 'sans-serif'],
+            balgin: ['"Candara"', '"BalginExtraLight"', '"Cantarell"', 'sans-serif'],
+            headline: ['"Candara"', '"Plus Jakarta Sans"', '"Cantarell"', 'sans-serif'],
+            body: ['"Candara"', '"Inter"', '"Cantarell"', 'sans-serif'],
             mono: ['"DM Mono"', 'monospace']
           }
         }
@@ -61,6 +62,11 @@
   </script>
 
   <style>
+    /* FUENTE INSTITUCIONAL: CANDARA & FALLBACKS */
+    body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, .font-headline, .font-body {
+      font-family: 'Candara', 'Candara Light', 'Cantarell', Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
     /* ========================================================================= */
     /* TIPOGRAFÍA CORPORATIVA OFICIAL: BALGIN EXTRA LIGHT                         */
     /* ========================================================================= */
@@ -524,45 +530,89 @@
 </head>
 <body class="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-900 font-body antialiased selection:bg-[#00FFFF] selection:text-[#002C45]">
 
-  <!-- ========================================================================= -->
-  <!-- BARRA DE NAVEGACIÓN SUPERIOR (Persistente)                                 -->
+      <!-- ========================================================================= -->
+  <!-- BARRA DE NAVEGACIÓN PRINCIPAL (PERSISTENTE)                                -->
   <!-- ========================================================================= -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- LOGO OFICIAL CORPORATIVO EFICIAN (Fondo Claro) -->
+        <!-- LOGO OFICIAL CORPORATIVO EFICIAN -->
         <a href="javascript:void(0)" onclick="showView('inicio')" class="flex items-center gap-3 group">
           <img src="LOGOS_EFICIAN/LOGO CORPORATIVO GRIS -CIAN  PNG-01.png" alt="Efician - Energía que transforma" class="h-9 sm:h-11 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
         </a>
 
-        <!-- MENÚ DE VISTAS PRINCIPALES (Desktop) -->
-        <nav class="hidden md:flex items-center gap-1 font-body text-sm font-medium text-[#545454]">
-          <button onclick="showView('inicio')" id="nav-inicio" class="px-3.5 py-2 rounded-xl transition-all text-[#002C45] bg-slate-100 font-semibold">
+        <!-- MENÚ DE NAVEGACIÓN DESKTOP -->
+        <nav class="hidden md:flex items-center gap-1.5 font-body text-sm font-medium text-[#545454]">
+          
+          <!-- 1. INICIO (Sin menú desplegable) -->
+          <button onclick="showView('inicio')" id="nav-inicio" class="px-3.5 py-2 rounded-xl transition-all text-[#002C45] bg-slate-100 font-semibold cursor-pointer">
             Inicio
           </button>
-          <button onclick="showView('shop')" id="nav-shop" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50">
+
+          <!-- 2. SHOP SOLAR (Sin menú desplegable) -->
+          <button onclick="showView('shop')" id="nav-shop" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] cursor-pointer">
             Shop Solar
           </button>
-          <button onclick="showView('calculadora')" id="nav-calculadora" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50">
+
+          <!-- 3. CALCULADORA SOLAR (Sin menú desplegable) -->
+          <button onclick="showView('calculadora')" id="nav-calculadora" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] cursor-pointer">
             Calculadora Solar
           </button>
-          <button onclick="showView('servicios')" id="nav-servicios" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50">
-            Servicios
-          </button>
-          <button onclick="showView('nosotros')" id="nav-nosotros" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50">
-            Nosotros
-          </button>
+
+          <!-- 4. SERVICIOS (Menú desplegable solo texto con las 6 opciones del ciclo) -->
+          <div class="relative group py-2">
+            <button onclick="showView('servicios')" id="nav-servicios" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] flex items-center gap-1 cursor-pointer">
+              <span>Servicios</span>
+              <svg class="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="absolute top-full left-0 pt-1 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 transform origin-top -translate-y-1 group-hover:translate-y-0 z-50">
+              <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 text-left space-y-0.5">
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-diagnostico')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Diagnóstico</a>
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-diseno')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Diseño</a>
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-ingenieria')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Ingeniería</a>
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-ejecucion')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Ejecución</a>
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-operacion')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Operación</a>
+                <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-proyectos')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Proyectos</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. NOSOTROS (Menú desplegable solo texto con las 6 opciones oficiales) -->
+          <div class="relative group py-2">
+            <button onclick="showView('nosotros')" id="nav-nosotros" class="px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] flex items-center gap-1 cursor-pointer">
+              <span>Nosotros</span>
+              <svg class="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="absolute top-full left-0 pt-1 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 transform origin-top -translate-y-1 group-hover:translate-y-0 z-50">
+              <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 text-left space-y-0.5">
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-efician')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">EFICIAN</a>
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-que-hacemos')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Qué Hacemos</a>
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-vision-mision')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Visión y Misión</a>
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-proposito')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Propósito</a>
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-valores')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">Valores</a>
+                <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-ods')" class="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#002C45] hover:bg-slate-100 transition-colors">ODS</a>
+              </div>
+            </div>
+          </div>
+
         </nav>
 
-        <!-- ACCIONES RÁPIDAS: WHATSAPP & CARRITO -->
+        <!-- ACCIONES RÁPIDAS: ASISTENCIA, SOCIOS & CARRITO -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <!-- Botón Acceso Socios / Portal Directivo -->
+          
+          <!-- Botón Asistente Técnico -->
+          <button onclick="toggleFaqBot()" class="p-2.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#545454] hover:text-[#002C45] transition-colors flex items-center gap-1.5" title="Asistente Técnico Efician">
+            <svg class="w-5 h-5 text-[#002C45]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+            <span class="hidden lg:inline text-xs font-semibold text-slate-700">Chat</span>
+          </button>
+
+          <!-- Botón Acceso Socios -->
           <button onclick="handleOwnerTrigger()" id="btn-owner-trigger" class="relative p-2.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#545454] hover:text-[#002C45] transition-colors flex items-center gap-1.5" title="Portal Directivo para Socios (Alt+S)">
             <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
-            <span class="hidden xl:inline text-xs font-headline font-semibold text-slate-700">Socios</span>
+            <span class="hidden xl:inline text-xs font-semibold text-slate-700">Socios</span>
           </button>
 
           <!-- Botón de Carrito de Compra -->
@@ -590,14 +640,50 @@
         </div>
       </div>
 
-      <!-- Menú Desplegable Mobile -->
+      <!-- MENÚ DESPLEGABLE MOBILE -->
       <div id="mobile-nav-menu" class="hidden md:hidden py-4 border-t border-slate-200 space-y-2 font-body text-sm">
         <button onclick="showView('inicio'); toggleMobileNav()" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#002C45] hover:bg-slate-100">Inicio</button>
         <button onclick="showView('shop'); toggleMobileNav()" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">Shop Solar</button>
         <button onclick="showView('calculadora'); toggleMobileNav()" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">Calculadora Solar</button>
-        <button onclick="showView('servicios'); toggleMobileNav()" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">Servicios</button>
-        <button onclick="showView('nosotros'); toggleMobileNav()" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">Nosotros</button>
-        <button onclick="handleOwnerTrigger(); toggleMobileNav()" class="flex items-center gap-2.5 w-full text-left px-4 py-2.5 rounded-xl font-medium text-slate-700 hover:bg-slate-100 border-t border-slate-100 pt-3">
+
+        <!-- Acordeón Mobile: Servicios -->
+        <div class="space-y-1">
+          <button onclick="toggleMobileSubmenu('mob-servicios')" class="flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">
+            <span>Servicios</span>
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="mob-servicios" class="hidden pl-6 pr-4 space-y-1 text-xs text-slate-600">
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-diagnostico'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Diagnóstico</a>
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-diseno'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Diseño</a>
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-ingenieria'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Ingeniería</a>
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-ejecucion'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Ejecución</a>
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-operacion'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Operación</a>
+            <a href="javascript:void(0)" onclick="scrollToServiciosSection('servicios-proyectos'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Proyectos</a>
+          </div>
+        </div>
+
+        <!-- Acordeón Mobile: Nosotros -->
+        <div class="space-y-1">
+          <button onclick="toggleMobileSubmenu('mob-nosotros')" class="flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#545454] hover:bg-slate-100">
+            <span>Nosotros</span>
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="mob-nosotros" class="hidden pl-6 pr-4 space-y-1 text-xs text-slate-600">
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-efician'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">EFICIAN</a>
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-que-hacemos'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Qué Hacemos</a>
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-vision-mision'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Visión y Misión</a>
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-proposito'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Propósito</a>
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-valores'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">Valores</a>
+            <a href="javascript:void(0)" onclick="scrollToNosotrosSection('nosotros-ods'); toggleMobileNav()" class="block py-1.5 hover:text-[#002C45]">ODS</a>
+          </div>
+        </div>
+
+        <button onclick="toggleFaqBot(); toggleMobileNav()" class="flex items-center gap-2.5 w-full text-left px-4 py-2.5 rounded-xl font-medium text-[#002C45] hover:bg-slate-100 border-t border-slate-100 pt-3">
+          <svg class="w-4 h-4 text-[#002C45]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          <span>Asistente Técnico Efician (Chat)</span>
+        </button>
+
+        <button onclick="handleOwnerTrigger(); toggleMobileNav()" class="flex items-center gap-2.5 w-full text-left px-4 py-2.5 rounded-xl font-medium text-slate-700 hover:bg-slate-100">
           <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
@@ -1726,113 +1812,245 @@
     <!-- ======================================================================= -->
     <!-- VISTA 4: SERVICIOS DE INGENIERÍA // FOTOGRÁFICOS                        -->
     <!-- ======================================================================= -->
-    <section id="view-servicios" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <section id="view-servicios" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
       
-      <div class="mb-10 pb-6 border-b border-slate-200">
-        <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#002C45] uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-[#00FFFF]"></span>
-          <span>Ingeniería &amp; Eficiencia Austral</span>
+      <!-- HERO DE SERVICIOS CON LA IMAGEN SOLICITADA: 6.webp (ESTRUCTURA IDÉNTICA A NOSOTROS) -->
+      <div class="card-clean overflow-hidden border border-slate-200 shadow-md">
+        <div class="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+          <img src="IMAGENES_EFICIAN/IMAGENES/6.webp" alt="Servicios de Ingeniería Energética Efician en la Patagonia" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#002C45] via-[#002C45]/60 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#00FFFF] mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#00FFFF]"></span>
+              <span>Ingeniería Austral &amp; Eficiencia Energética · Coyhaique</span>
+            </div>
+            <h2 class="font-balgin text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-white mb-2">
+              Servicios de Ingeniería Especializada
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 font-body max-w-2xl leading-relaxed">
+              Acompañamiento técnico integral desde el diagnóstico de consumo y diseño hasta la ejecución, operación y regularización formal SEC TE4 en la Patagonia.
+            </p>
+          </div>
         </div>
-        <h2 class="font-balgin text-3xl sm:text-4xl font-light text-[#002C45] tracking-wide mt-1">
-          Servicios de Ingeniería Especializada
-        </h2>
-        <p class="text-sm text-[#545454] mt-1 max-w-2xl">
-          Acompañamiento técnico integral desde el levantamiento topográfico hasta la recepción final SEC TE4.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- SERVICIO 1: DIAGNÓSTICO ISO 50.001 -->
-        <div class="card-clean overflow-hidden flex flex-col justify-between group">
-          <div class="h-56 overflow-hidden relative">
-            <img src="IMAGENES_EFICIAN/IMAGENES/6.jpg" alt="Diagnóstico Energético e ISO 50.001" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-bold px-3 py-1 rounded-lg">
-              01 // Eficiencia
-            </span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-headline text-xl font-light text-[#002C45] mb-2 tracking-wide">Diagnóstico Energético &amp; Norma ISO 50.001</h3>
-            <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
-              Evaluación rigurosa de consumos eléctricos y térmicos, detección de fugas, curvas de demanda y asesoría para implementar planes de gestión energética en empresas e instituciones de la Región de Aysén.
+        <div class="p-6 sm:p-8 bg-white grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-[#545454] divide-y md:divide-y-0 md:divide-x divide-slate-100">
+          <div class="md:pr-6">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Diagnóstico Analítico</span>
+            <p class="leading-relaxed">
+              Evaluación rigurosa de consumos eléctricos y térmicos, curvas de demanda y detección de oportunidades de ahorro.
             </p>
-            <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Medición de armónicos y calidad de energía</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Informes de retorno de inversión por mejoras</li>
-            </ul>
+          </div>
+          <div class="pt-4 md:pt-0 md:px-6">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Montaje Resistente</span>
+            <p class="leading-relaxed">
+              Obras e ingeniería estructural calculadas para resistir ráfagas de viento sobre 120 km/h y peso de nieve austral.
+            </p>
+          </div>
+          <div class="pt-4 md:pt-0 md:pl-6">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Certificación SEC TE4</span>
+            <p class="leading-relaxed">
+              Firma de instalador autorizado SEC e intermediación formal ante Edelaysén para acogerse a la Ley Net Billing.
+            </p>
           </div>
         </div>
+      </div>
 
-        <!-- SERVICIO 2: PLANOS & DECLARACIÓN SEC TE4 -->
-        <div class="card-clean overflow-hidden flex flex-col justify-between group">
-          <div class="h-56 overflow-hidden relative">
-            <img src="IMAGENES_EFICIAN/IMAGENES/2.jpg" alt="Planos de ingeniería y TE4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-bold px-3 py-1 rounded-lg">
-              02 // Regularización
-            </span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-headline text-xl font-light text-[#002C45] mb-2 tracking-wide">Planos de Ingeniería &amp; Certificación SEC TE4</h3>
-            <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
-              Levantamiento unilineal, cálculo de protecciones según pliego técnico RPTD y tramitación formal de declaración TE4 ante la SEC para acogerse a la Ley 21.118 de Net Billing con Edelaysén.
-            </p>
-            <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Firma de Ingeniero Eléctrico Autorizado SEC</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Gestión completa de cambio a medidor bidireccional</li>
-            </ul>
-          </div>
+      <!-- GRILLA DE LAS 6 ETAPAS OPERATIVAS (CORRESPONDIENTES AL MENÚ DESPLEGABLE) -->
+      <div class="space-y-8">
+        
+        <div class="border-b border-slate-200 pb-4">
+          <h3 class="font-balgin text-2xl sm:text-3xl font-light text-[#002C45]">Ciclo Integral de Soluciones</h3>
+          <p class="text-xs sm:text-sm text-[#545454] mt-1">Conoce cada una de las fases de desarrollo técnico con las que abordamos los proyectos energéticos en Aysén.</p>
         </div>
 
-        <!-- SERVICIO 3: MONTAJE EN FAENAS AUSTRALES -->
-        <div class="card-clean overflow-hidden flex flex-col justify-between group">
-          <div class="h-56 overflow-hidden relative">
-            <img src="IMAGENES_EFICIAN/IMAGENES/4.jpg" alt="Montaje e instalaciones solares" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-bold px-3 py-1 rounded-lg">
-              03 // Construcción
-            </span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- 1. DIAGNÓSTICO -->
+          <div id="servicios-diagnostico" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-[#00FFFF]/60 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/eficiencia_energetica_manos.png" alt="Diagnóstico Energético" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  01 // Diagnóstico
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Diagnóstico Energético Integral</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Auditoría técnica de consumos eléctricos y térmicos, curvas de carga y facturación Edelaysén para identificar pérdidas y dimensionar el potencial fotovoltaico real.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Medición y balance de demanda horaria</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Detección de consumos parásitos</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Estimación de ahorro con Ley Net Billing</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0 space-y-2">
+              <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20contratar%20un%20Diagn%C3%B3stico%20Energ%C3%A9tico." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-[#002C45] hover:bg-[#001f33] text-[#00FFFF] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-xs">
+                <span>Contrata aquí</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <button onclick="showView('calculadora'); goToSlide(1)" class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer">
+                <span>Haz tu cálculo aquí</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </button>
+            </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-headline text-xl font-light text-[#002C45] mb-2 tracking-wide">Montajes e Instalaciones en Terreno Austral</h3>
-            <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
-              Obras de montaje con estructuras de fijación certificadas para resistir ráfagas de más de 120 km/h y peso de nieve, sellado impermeable de cubiertas y canalización protegida contra radiación UV y heladas.
-            </p>
-            <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Fijación anti-viento en cubiertas de zinc y suelo</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Puesta en marcha y pruebas de inyección</li>
-            </ul>
-          </div>
-        </div>
 
-        <!-- SERVICIO 4: SISTEMAS BESS & MICROREDES -->
-        <div class="card-clean overflow-hidden flex flex-col justify-between group">
-          <div class="h-56 overflow-hidden relative">
-            <img src="IMAGENES_EFICIAN/IMAGENES/PANEL 140 X 100.jpg" alt="Almacenamiento BESS y microredes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-bold px-3 py-1 rounded-lg">
-              04 // Autonomía
-            </span>
+          <!-- 2. DISEÑO -->
+          <div id="servicios-diseno" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/3.jpg" alt="Diseño y Arquitectura Solar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  02 // Diseño
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Diseño y Arquitectura Pasiva</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Modelación espacial de sombras, inclinación óptima de paneles según la latitud austral y diseño de envolvente térmico para optimizar la eficiencia pasiva de la construcción.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Simulación de radiación estacional Aysén</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Estudio de asoleamiento y cálculo de sombras</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Compatibilidad estructural de cubiertas</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20asesor%C3%ADa%20en%20dise%C3%B1o%20y%20arquitectura%20solar." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#002C45] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                <span>Consultar con Especialista</span>
+              </a>
+            </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-headline text-xl font-light text-[#002C45] mb-2 tracking-wide">Sistemas Híbridos &amp; Almacenamiento BESS</h3>
-            <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
-              Diseño de sistemas de almacenamiento en baterías de litio ferrofosfato (LiFePO4) acoplados con generadores de respaldo y telemetría remota para abastecer fundos y operaciones sin red en la Patagonia.
-            </p>
-            <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Integración automática con grupos electrógenos</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Monitoreo de estado de carga (SOC) en tiempo real</li>
-            </ul>
+
+          <!-- 3. INGENIERÍA -->
+          <div id="servicios-ingenieria" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/2.jpg" alt="Ingeniería Eléctrica SEC TE4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  03 // Ingeniería
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Ingeniería Eléctrica &amp; SEC TE4</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Elaboración de planos unilineales, memoria de cálculo de conductores, mallas a tierra, protecciones diferenciales y tramitación oficial de declaración TE4 ante la SEC.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Firma de Ingeniero Eléctrico Autorizado SEC</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Gestión integral de medidor bidireccional</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Cumplimiento de pliego técnico normativo RPTD</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20necesito%20tramitaci%C3%B3n%20SEC%20TE4." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#002C45] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                <span>Tramitar Certificación SEC</span>
+              </a>
+            </div>
           </div>
+
+          <!-- 4. EJECUCIÓN -->
+          <div id="servicios-ejecucion" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/4.jpg" alt="Montaje e Instalaciones en Terreno" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  04 // Ejecución
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Montajes e Instalaciones en Terreno</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Obras en faena con fijaciones certificadas para soportar vientos sobre 120 km/h y sobrecargas de nieve, sellado impermeable de techumbres y canalizaciones resistentes a heladas.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Fijación anti-viento en cubiertas de zinc y suelo</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Canalización protegida contra radiación UV</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Pruebas de inyección y puesta en marcha</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20cotizar%20un%20montaje%20o%20instalaci%C3%B3n%20solar." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#002C45] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                <span>Cotizar Instalación</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 5. OPERACIÓN -->
+          <div id="servicios-operacion" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/6.jpg" alt="Operación, Monitoreo y Climatización" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  05 // Operación
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Operación, Monitoreo &amp; Climatización</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Supervisión remota continua vía telemetría, mantención preventiva de sistemas fotovoltaicos e integración con bombas de calor y aerotermia para calefacción limpia.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Monitoreo de generación y consumo en tiempo real</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Bombas de calor inverter para frío extremo (-15°C)</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Servicio técnico y mantenimiento regional</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20informaci%C3%B3n%20sobre%20operaci%C3%B3n%20y%20mantenimiento." target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-[#002C45] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                <span>Consultar Operación &amp; Mantención</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 6. PROYECTOS -->
+          <div id="servicios-proyectos" class="card-clean overflow-hidden flex flex-col justify-between group border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+            <div>
+              <div class="h-52 overflow-hidden relative">
+                <img src="IMAGENES_EFICIAN/IMAGENES/PANEL 140 X 100.jpg" alt="Proyectos Renovables y BESS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 bg-[#002C45]/90 backdrop-blur-xs text-[#00FFFF] font-mono text-[11px] font-bold px-2.5 py-1 rounded-lg border border-[#00FFFF]/30">
+                  06 // Proyectos
+                </div>
+              </div>
+              <div class="p-6">
+                <h4 class="font-headline text-lg font-bold text-[#002C45] mb-2">Proyectos Especiales, BESS &amp; ISO</h4>
+                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed mb-4">
+                  Desarrollo de microrredes con almacenamiento en baterías de litio (LiFePO4) para parcelas y fundos sin red, y asesoría para implementación de la norma ISO 50.001.
+                </p>
+                <ul class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Sistemas híbridos y respaldo BESS LiFePO4</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Integración con grupos electrógenos</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#002C45]"></span>Planes de gestión de energía (ISO 50.001)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-6 pt-0 space-y-2">
+              <button onclick="showView('shop')" class="w-full py-2.5 px-4 rounded-xl border border-[#002C45] text-[#002C45] hover:bg-[#002C45] hover:text-[#00FFFF] font-headline font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer">
+                <span>Ver Kits con Baterías en Shop</span>
+              </button>
+            </div>
+          </div>
+
         </div>
 
       </div>
 
-      <!-- BANNER DE CONTACTO PARA SERVICIOS -->
-      <div class="mt-12 p-8 rounded-3xl bg-[#002C45] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-[#00FFFF]/30 shadow-xl">
+      <!-- BANNER DE CONTACTO DIRECTO PARA SERVICIOS -->
+      <div class="p-8 rounded-3xl bg-[#002C45] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-[#00FFFF]/30 shadow-xl">
         <div>
-          <h4 class="font-headline font-light text-xl text-white">¿Necesitas una visita técnica en tu predio o empresa?</h4>
-          <p class="text-xs sm:text-sm text-slate-300 mt-1">Coordinamos evaluaciones en terreno en Coyhaique, Puerto Aysén, Chile Chico y valles aledaños.</p>
+          <span class="text-xs font-mono uppercase tracking-widest text-[#00FFFF] block mb-1">Presencia en Terreno Austral</span>
+          <h4 class="font-headline font-light text-xl sm:text-2xl text-white">¿Deseas evaluar la viabilidad de tu predio o empresa?</h4>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">Coordinamos evaluaciones en terreno en Coyhaique, Puerto Aysén, Valle Simpson, Puerto Guadal, Chile Chico y alrededores.</p>
         </div>
-        <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20solicitar%20una%20visita%20t%C3%A9cnica%20o%20diagn%C3%B3stico%20energ%C3%A9tico." target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-[#00FFFF] hover:bg-white text-[#002C45] font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0">
-          Solicitar Visita Técnica
+        <a href="https://wa.me/56992126081?text=Hola%20Efician%2C%20quisiera%20coordinar%20una%20visita%20t%C3%A9cnica%20o%20evaluaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-[#00FFFF] hover:bg-white text-[#002C45] font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 flex items-center gap-2">
+          <span>Conversar por WhatsApp</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
       </div>
 
@@ -1844,104 +2062,83 @@
     <!-- ======================================================================= -->
     <section id="view-nosotros" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
       
-      <!-- ENCABEZADO DE SECCIÓN CON FOTO PANORÁMICA REAL -->
-      <div class="card-clean overflow-hidden border border-slate-200 shadow-md">
-        <div class="relative h-64 sm:h-80 md:h-96 overflow-hidden">
-          <img src="IMAGENES_EFICIAN/IMAGENES/casa alta resulucion.jpg" alt="Instalaciones fotovoltaicas Efician en la Patagonia" class="w-full h-full object-cover" />
+      <!-- 1. EFICIAN (Slide 4: Identidad & Imagen Principal Mano con mundo) -->
+      <div id="nosotros-efician" class="card-clean overflow-hidden border border-slate-200 shadow-sm">
+        <div class="relative h-72 sm:h-96 md:h-[420px] overflow-hidden">
+          <img src="IMAGENES_EFICIAN/IMAGENES/mano_con_mundo.jpg" alt="Efician - Mano sosteniendo el mundo con energía limpia" class="w-full h-full object-cover" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#002C45] via-[#002C45]/60 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
             <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#00FFFF] mb-2">
               <span class="w-2 h-2 rounded-full bg-[#00FFFF]"></span>
-              <span>Soluciones Integrales y Eficiencia Energética · Coyhaique</span>
+              <span>EFICIAN</span>
             </div>
-            <h2 class="font-balgin text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-white mb-2">
+            <h2 class="font-balgin text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-white mb-3">
               Sobre Efician
             </h2>
-            <p class="text-xs sm:text-sm text-slate-200 font-body max-w-2xl leading-relaxed">
-              Desarrollamos proyectos fotovoltaicos y de eficiencia energética adaptados a las condiciones de la Región de Aysén, orientados al ahorro y la autonomía eléctrica.
-            </p>
-          </div>
-        </div>
-        
-        <div class="p-6 sm:p-8 bg-white grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-[#545454] divide-y md:divide-y-0 md:divide-x divide-slate-100">
-          <div class="md:pr-6">
-            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Origen Local</span>
-            <p class="leading-relaxed">
-              Empresa establecida en Coyhaique, con experiencia directa en el clima y los requerimientos técnicos de la zona.
-            </p>
-          </div>
-          <div class="pt-4 md:pt-0 md:px-6">
-            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Ingeniería Certificada</span>
-            <p class="leading-relaxed">
-              Proyectos respaldados por ingenieros autorizados ante la SEC, garantizando instalaciones seguras bajo norma RPTD y Ley 21.118 Net Billing.
-            </p>
-          </div>
-          <div class="pt-4 md:pt-0 md:pl-6">
-            <span class="font-mono text-[10px] uppercase tracking-wider text-[#002C45] font-medium block mb-1">Autonomía y Respaldo</span>
-            <p class="leading-relaxed">
-              Sistemas híbridos y aislados con baterías de litio para mantener suministro continuo frente a cortes y nevadas.
+            <p class="text-sm sm:text-base text-slate-100 font-body max-w-3xl leading-relaxed">
+              Somos una empresa de soluciones energéticas, sostenibilidad, ingeniería y recursos renovables que integra tecnología para impulsar desarrollo sostenible, transformación energética y compromiso local.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- MISIÓN Y VISIÓN CON FOTOGRAFÍAS REALES -->
-      <div>
-        <div class="text-center max-w-2xl mx-auto mb-8">
-          <h3 class="font-balgin text-2xl sm:text-3xl font-light text-[#002C45]">Misión y Visión</h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          <!-- TARJETA MISIÓN -->
-          <div class="card-clean overflow-hidden flex flex-col justify-between group">
-            <div class="h-52 overflow-hidden relative">
-              <img src="IMAGENES_EFICIAN/IMAGENES/4.jpg" alt="Ingenieros de Efician en faena de instalación solar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#002C45]/80 via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-medium px-3 py-1 rounded-lg">
-                01 // Misión
-              </span>
-            </div>
-            <div class="p-6 sm:p-7 flex-grow flex flex-col justify-between">
-              <div>
-                <h4 class="font-headline text-lg sm:text-xl font-medium text-[#002C45] mb-2.5">
-                  Transformar la Energía
-                </h4>
-                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed">
-                  Transformar la energía en desarrollo sostenible y ahorro tangible para hogares, pymes e industrias, eliminando barreras técnicas y facilitando el acceso a soluciones solares confiables y dimensionadas con rigor en la Patagonia.
-                </p>
-              </div>
-
-            </div>
+      <!-- 2. QUÉ HACEMOS (Slide 5) -->
+      <div id="nosotros-que-hacemos" class="card-clean p-8 sm:p-12 border border-slate-200">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+          <div class="inline-flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-[#002C45]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FFFF]"></span>
+            <span>Que hacemos</span>
           </div>
-
-          <!-- TARJETA VISIÓN -->
-          <div class="card-clean overflow-hidden flex flex-col justify-between group">
-            <div class="h-52 overflow-hidden relative">
-              <img src="IMAGENES_EFICIAN/IMAGENES/1.jpg" alt="Instalación fotovoltaica residencial en Aysén" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#002C45]/80 via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 bg-[#002C45] text-[#00FFFF] font-mono text-xs font-medium px-3 py-1 rounded-lg">
-                02 // Visión
-              </span>
-            </div>
-            <div class="p-6 sm:p-7 flex-grow flex flex-col justify-between">
-              <div>
-                <h4 class="font-headline text-lg sm:text-xl font-medium text-[#002C45] mb-2.5">
-                  Referentes en Eficiencia y Sustentabilidad
-                </h4>
-                <p class="text-xs sm:text-sm text-[#545454] leading-relaxed">
-                  Consolidarnos como el equipo de referencia en ingeniería fotovoltaica, microrredes aisladas y eficiencia energética en el sur austral, impulsando comunidades autónomas, descarbonización productiva e innovación aplicada.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
+          <h3 class="font-balgin text-2xl sm:text-3xl md:text-4xl font-light text-[#002C45]">
+            Qué Hacemos
+          </h3>
+          <div class="w-12 h-0.5 bg-[#00FFFF] mx-auto my-2"></div>
+          <p class="text-sm sm:text-base md:text-lg text-[#545454] font-body leading-relaxed max-w-3xl mx-auto pt-2">
+            Diseñamos e implementamos proyectos de eficiencia energética y tecnología aplicada, transformando el consumo energético en ahorro, autonomía y crecimiento. Nuestro enfoque combina innovación técnica con impacto real, eliminando barreras de acceso para acelerar la transición hacia un futuro sostenible.
+          </p>
         </div>
       </div>
 
-      <!-- MÓDULO DE VALORES: EL ACRÓNIMO EFICIAN -->
-      <div class="card-clean p-6 sm:p-10 border border-slate-200">
+      <!-- 3. VISIÓN Y MISIÓN (Slide 6) -->
+      <div id="nosotros-vision-mision" class="card-clean p-8 sm:p-12 border border-slate-200 bg-gradient-to-br from-white to-slate-50/50">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+          <div class="inline-flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-[#002C45]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FFFF]"></span>
+            <span>Horizonte Institucional</span>
+          </div>
+          <h3 class="font-balgin text-2xl sm:text-3xl md:text-4xl font-light text-[#002C45]">
+            Visión y Misión
+          </h3>
+          <div class="w-12 h-0.5 bg-[#00FFFF] mx-auto my-2"></div>
+          <p class="text-sm sm:text-base md:text-lg text-[#545454] font-body leading-relaxed max-w-3xl mx-auto pt-2">
+            Impulsar el desarrollo sustentable por medio del diseño e implementación de soluciones energéticas eficientes que integren ingeniería avanzada, innovación y energías renovables, facilitando el acceso a proyectos sostenibles mediante modelos de financiamiento colaborativo y adecuada autogestión de recursos naturales.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. PROPÓSITO (Slide 7) -->
+      <div id="nosotros-proposito" class="card-clean p-8 sm:p-12 border border-slate-200 bg-gradient-to-br from-white via-slate-50/30 to-[#002C45]/5 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+          <div class="inline-flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-[#002C45]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FFFF]"></span>
+            <span>Nuestro Motor Central</span>
+          </div>
+          <h3 class="font-balgin text-2xl sm:text-3xl md:text-4xl font-light text-[#002C45]">
+            Propósito
+          </h3>
+          <div class="w-12 h-0.5 bg-[#00FFFF] mx-auto my-2"></div>
+          <blockquote class="text-base sm:text-xl md:text-2xl text-[#002C45] font-light font-balgin leading-relaxed max-w-3xl mx-auto pt-2 italic">
+            «Transformar la energía en desarrollo sostenible, eliminando barreras económicas y tecnológicas para acelerar la transición hacia un futuro más eficiente, colaborativo y sustentable.»
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- 5. VALORES: EL ACRÓNIMO EFICIAN (Slide 8) -->
+      <div id="nosotros-valores" class="card-clean p-6 sm:p-10 border border-slate-200">
         <div class="mb-8 pb-4 border-b border-slate-200">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#002C45] mb-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FFFF]"></span>
+            <span>Pilares Fundacionales</span>
+          </div>
           <h3 class="font-balgin text-2xl sm:text-3xl font-light text-[#002C45]">Nuestros Valores</h3>
         </div>
 
@@ -1964,184 +2161,112 @@
             </div>
           </div>
 
-          <!-- LISTA DE VALORES CON LÍNEA GUÍA TÉCNICA Y NODOS CIRCULARES -->
+          <!-- LISTA DE VALORES CON FRASES EXPLICATIVAS (SLIDE 8) -->
           <div class="flex-1 relative space-y-3 sm:space-y-4">
-            <!-- Línea guía vertical continua (Busbar técnica punteada centrada en los nodos) -->
-            <div class="absolute left-[35px] top-6 bottom-6 w-0.5 border-l-2 border-dashed border-[#00FFFF]/50 pointer-events-none"></div>
+            <!-- Línea guía vertical continua -->
+            <div class="absolute left-[27px] top-4 bottom-4 w-0.5 border-l-2 border-dashed border-[#00FFFF]/40 pointer-events-none"></div>
 
-            <!-- e: Energía -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
-                  <span class="font-balgin text-lg text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">e</span>
+            <!-- E: Energía -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
+                  <span class="font-balgin text-base text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">E</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Energía
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  El núcleo del proyecto con rigurosidad profesional y enfoque en resultados medibles.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Energía</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Limpia, renovable y enfocada en resultados técnicos medibles adaptados a la Patagonia.
                 </p>
               </div>
             </div>
 
-            <!-- f: Financiamiento Colaborativo -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
-                  <span class="font-balgin text-lg text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">f</span>
+            <!-- F: Financiamiento Colaborativo -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
+                  <span class="font-balgin text-base text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">F</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Financiamiento Colaborativo
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <circle cx="18" cy="5" r="3"/>
-                      <circle cx="6" cy="12" r="3"/>
-                      <circle cx="18" cy="19" r="3"/>
-                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Crowdfunding y modelos que hacen de la sostenibilidad una oportunidad alcanzable.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Financiamiento Colaborativo</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Rentabilidad transparente, modelos de amortización calculados y acceso facilitado a proyectos sostenibles.
                 </p>
               </div>
             </div>
 
-            <!-- i: Innovación -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
-                  <span class="font-balgin text-lg text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">i</span>
+            <!-- I: Innovación -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
+                  <span class="font-balgin text-base text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">I</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Innovación
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Ingeniería y soluciones disruptivas con tecnología aplicada para impacto real.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Innovación</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Ingeniería aplicada y tecnología de vanguardia certificada para operar en clima frío extremo.
                 </p>
               </div>
             </div>
 
-            <!-- c: Cooperación -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
-                  <span class="font-balgin text-lg text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">c</span>
+            <!-- C: Cooperación -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
+                  <span class="font-balgin text-base text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">C</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Cooperación
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Fortalecimiento de la economía regional y desarrollo integrado de las comunidades.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Cooperación</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Alianzas estratégicas, trabajo colaborativo en terreno y cercanía activa con la comunidad.
                 </p>
               </div>
             </div>
 
-            <!-- i: Integración (cyan highlight en el ia de efician) -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-[#002C45] border-2 border-[#00FFFF] text-[#00FFFF] flex items-center justify-center shadow-xs">
-                  <span class="font-balgin text-lg font-medium">i</span>
+            <!-- I: Integración -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-[#002C45] border-2 border-[#00FFFF] text-[#00FFFF] flex items-center justify-center shadow-xs">
+                  <span class="font-balgin text-base font-medium">I</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Integración
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-                      <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-                      <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-                      <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-                      <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4" stroke-linecap="round" opacity="0.6"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Modelos de gestión continua que favorecen la alta productividad de los procesos.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Integración</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Soluciones completas que integran ingeniería avanzada, almacenamiento BESS y normativa SEC.
                 </p>
               </div>
             </div>
 
-            <!-- a: Autoconsumo (cyan highlight en el ia de efician) -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-[#002C45] border-2 border-[#00FFFF] text-[#00FFFF] flex items-center justify-center shadow-xs">
-                  <span class="font-balgin text-lg font-medium">a</span>
+            <!-- A: Autoconsumo -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-[#002C45] border-2 border-[#00FFFF] text-[#00FFFF] flex items-center justify-center shadow-xs">
+                  <span class="font-balgin text-base font-medium">A</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Autoconsumo
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Generación propia y redes energéticas descentralizadas, resilientes y responsables.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Autoconsumo</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Seguridad de suministro y redes energéticas descentralizadas para la adecuada autogestión de recursos.
                 </p>
               </div>
             </div>
 
-            <!-- n: Naturaleza -->
-            <div class="group relative flex items-start gap-4 sm:gap-5 p-4 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
-              <div class="relative z-10 flex items-center justify-center shrink-0">
-                <div class="w-10 h-10 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
-                  <span class="font-balgin text-lg text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">n</span>
+            <!-- N: Naturaleza -->
+            <div class="group relative flex items-start gap-4 p-3 sm:p-3.5 rounded-xl transition-all hover:bg-slate-50 border border-transparent hover:border-slate-200">
+              <div class="relative z-10 flex items-center justify-center shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-full bg-white border-2 border-[#002C45] flex items-center justify-center group-hover:bg-[#002C45] transition-all shadow-xs">
+                  <span class="font-balgin text-base text-[#002C45] group-hover:text-[#00FFFF] transition-colors font-medium">N</span>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 pt-0.5">
-                <div class="flex items-center justify-between gap-3 mb-1">
-                  <h4 class="font-headline font-medium text-base sm:text-lg text-[#002C45] transition-colors">
-                    Naturaleza
-                  </h4>
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-[#002C45] group-hover:text-[#00FFFF] group-hover:border-[#002C45] transition-all shadow-2xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2 21c0-3 1.85-5.36 5.08-6"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 font-body leading-relaxed max-w-2xl">
-                  Equilibrio económico, social y ambiental respetando los recursos de la Patagonia.
+              <div class="flex-1 min-w-0">
+                <h4 class="font-headline font-medium text-base text-[#002C45] mb-0.5">Naturaleza</h4>
+                <p class="text-xs text-slate-600 font-body leading-relaxed">
+                  Equilibrio ecológico y respeto irrestricto por el patrimonio natural de la Patagonia.
                 </p>
               </div>
             </div>
@@ -2153,76 +2278,148 @@
         <div class="mt-8 pt-6 border-t border-slate-200 bg-slate-50/70 rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-center">
           <p class="font-body text-xs sm:text-sm text-slate-700 text-center leading-relaxed">
             <span class="font-medium text-[#002C45]">E</span>nergía con 
-            <span class="font-medium text-[#002C45]">F</span>inanciamiento 
-            <span class="font-medium text-[#002C45]">C</span>olaborativo, 
-            <span class="font-medium text-[#002C45]">I</span>nnovación y 
-            <span class="font-medium text-[#002C45]">A</span>utogestión de Recursos 
-            <span class="font-medium text-[#002C45]">N</span>aturales.
+            <span class="font-medium text-[#002C45]">F</span>inanciamiento colaborativo, 
+            <span class="font-medium text-[#002C45]">I</span>nnovación, 
+            <span class="font-medium text-[#002C45]">C</span>ooperación, 
+            <span class="font-medium text-[#002C45]">I</span>ntegración, 
+            <span class="font-medium text-[#002C45]">A</span>utoconsumo y respeto por la 
+            <span class="font-medium text-[#002C45]">N</span>aturaleza.
           </p>
         </div>
       </div>
 
-      <!-- PILARES DE CAPACIDAD TÉCNICA CON IMÁGENES -->
-      <div>
-        <div class="text-center max-w-2xl mx-auto mb-8">
-          <span class="text-xs font-mono font-medium text-[#002C45] uppercase tracking-wider block">Capacidades en Terreno</span>
-          <h3 class="font-balgin text-2xl sm:text-3xl font-light text-[#002C45] mt-1">Por Qué Confiar en Efician</h3>
+      <!-- 6. ODS (Slide 9: REESTRUCTURACIÓN ESTÉTICA EN SINTONÍA CON LA PÁGINA) -->
+      <div id="nosotros-ods" class="card-clean p-8 sm:p-12 border border-slate-200">
+        <div class="max-w-3xl mb-10">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#002C45] mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FFFF]"></span>
+            <span>Objetivos de Desarrollo Sostenible</span>
+          </div>
+          <h3 class="font-balgin text-2xl sm:text-3xl md:text-4xl font-light text-[#002C45]">
+            ODS
+          </h3>
+          <p class="text-xs sm:text-sm text-[#545454] mt-2">
+            Metas globales integradas activamente en cada una de nuestras soluciones de ingeniería y sostenibilidad:
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 5 TARJETAS DE ODS CON ESTÉTICA MINIMALISTA CORPORATIVA EFICIAN -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           
-          <div class="card-clean overflow-hidden">
-            <div class="h-44 overflow-hidden">
-              <img src="IMAGENES_EFICIAN/IMAGENES/2.jpg" alt="Ingeniería y planos eléctricos SEC" class="w-full h-full object-cover" />
+          <!-- ODS 7 -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#00FFFF] hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#002C45] text-[#00FFFF]">
+                  ODS 7
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              </div>
+              <h4 class="font-headline font-medium text-sm text-[#002C45] leading-snug pt-1">
+                Energía accesible y no contaminante
+              </h4>
             </div>
-            <div class="p-5">
-              <span class="text-[10px] font-mono text-[#002C45] uppercase font-medium block mb-1">Tramitación Oficial</span>
-              <h4 class="font-headline text-base font-medium text-[#002C45] mb-1.5">Certificación SEC TE4</h4>
-              <p class="text-xs text-[#545454] leading-relaxed">
-                Ingenieros eléctricos acreditados que gestionan el expediente completo y la conexión formal con Edelaysén.
-              </p>
-            </div>
-          </div>
-
-          <div class="card-clean overflow-hidden">
-            <div class="h-44 overflow-hidden">
-              <img src="IMAGENES_EFICIAN/IMAGENES/3.jpg" alt="Equipamiento fotovoltaico y baterías" class="w-full h-full object-cover" />
-            </div>
-            <div class="p-5">
-              <span class="text-[10px] font-mono text-[#002C45] uppercase font-medium block mb-1">Tecnología Probada</span>
-              <h4 class="font-headline text-base font-medium text-[#002C45] mb-1.5">Paneles Tier 1 y Baterías de Litio</h4>
-              <p class="text-xs text-[#545454] leading-relaxed">
-                Equipamiento probado con 25 años de garantía en módulos y estructuras calculadas para el viento y la nieve.
-              </p>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-mono text-slate-400 group-hover:text-[#002C45] transition-colors">
+              <span>Naciones Unidas</span>
             </div>
           </div>
 
-          <div class="card-clean overflow-hidden">
-            <div class="h-44 overflow-hidden">
-              <img src="IMAGENES_EFICIAN/IMAGENES/WhatsApp Image 2026-08-18 at 16.08.59.jpeg" alt="Instalaciones comerciales y productivas" class="w-full h-full object-cover" />
+          <!-- ODS 8 -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#00FFFF] hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#002C45] text-[#00FFFF]">
+                  ODS 8
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              </div>
+              <h4 class="font-headline font-medium text-sm text-[#002C45] leading-snug pt-1">
+                Trabajo decente y crecimiento económico
+              </h4>
             </div>
-            <div class="p-5">
-              <span class="text-[10px] font-mono text-[#002C45] uppercase font-medium block mb-1">Atención en Terreno</span>
-              <h4 class="font-headline text-base font-medium text-[#002C45] mb-1.5">Presencia y Soporte Local</h4>
-              <p class="text-xs text-[#545454] leading-relaxed">
-                Presencia permanente en Coyhaique y visitas a terreno en toda la región para mantención y postventa.
-              </p>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-mono text-slate-400 group-hover:text-[#002C45] transition-colors">
+              <span>Naciones Unidas</span>
             </div>
           </div>
 
+          <!-- ODS 9 -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#00FFFF] hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#002C45] text-[#00FFFF]">
+                  ODS 9
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              </div>
+              <h4 class="font-headline font-medium text-sm text-[#002C45] leading-snug pt-1">
+                Industria, Innovación e infraestructura
+              </h4>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-mono text-slate-400 group-hover:text-[#002C45] transition-colors">
+              <span>Naciones Unidas</span>
+            </div>
+          </div>
+
+          <!-- ODS 11 -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#00FFFF] hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#002C45] text-[#00FFFF]">
+                  ODS 11
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              </div>
+              <h4 class="font-headline font-medium text-sm text-[#002C45] leading-snug pt-1">
+                Ciudades y comunidades sostenibles
+              </h4>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-mono text-slate-400 group-hover:text-[#002C45] transition-colors">
+              <span>Naciones Unidas</span>
+            </div>
+          </div>
+
+          <!-- ODS 17 -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#00FFFF] hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#002C45] text-[#00FFFF]">
+                  ODS 17
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              </div>
+              <h4 class="font-headline font-medium text-sm text-[#002C45] leading-snug pt-1">
+                Alianza para lograr los Objetivos
+              </h4>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-mono text-slate-400 group-hover:text-[#002C45] transition-colors">
+              <span>Naciones Unidas</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BANNER DE CIERRE INSTITUCIONAL TRANSVERSAL (SLIDES 4 A 9) -->
+        <div class="mt-10 p-6 rounded-2xl bg-[#002C45] text-center relative overflow-hidden">
+          <div class="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 text-white">
+            <span class="w-2 h-2 rounded-full bg-[#00FFFF] hidden sm:inline-block"></span>
+            <p class="font-balgin text-lg sm:text-xl md:text-2xl font-light tracking-wide text-white">
+              Súmate, que tu energía trabaje por tí…
+            </p>
+            <span class="w-2 h-2 rounded-full bg-[#00FFFF] hidden sm:inline-block"></span>
+          </div>
         </div>
       </div>
 
-      <!-- MÓDULO DE CONTACTO CORPORATIVO -->
-      <div class="card-clean p-8 sm:p-10 border border-slate-200">
+      <!-- 7. CONTACTO CORPORATIVO -->
+      <div id="nosotros-contacto" class="card-clean p-8 sm:p-10 border border-slate-200">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div class="lg:col-span-7 space-y-4">
             <div>
-              <span class="text-xs font-mono font-medium text-[#002C45] uppercase tracking-wider block">Contacto</span>
+              <span class="text-xs font-mono font-medium text-[#002C45] uppercase tracking-wider block">Contacto Directo</span>
               <h3 class="font-balgin text-2xl sm:text-3xl font-light text-[#002C45] mt-1">Contáctanos para tu Proyecto Solar</h3>
               <p class="text-xs sm:text-sm text-[#545454] mt-1">
-                Atención y asesoría para proyectos residenciales, agrícolas y comerciales en toda la Región de Aysén.
+                Atención y asesoría técnica para proyectos residenciales, agrícolas y comerciales en toda la Región de Aysén.
               </p>
             </div>
 
@@ -3704,7 +3901,7 @@
     // ----------------------------------
     // SISTEMA DE NAVEGACIÓN ENTRE VISTAS DEDICADAS
     // -------------------------------------------------------------------------
-    function showView(viewName) {
+    function showView(viewName, subSection) {
       state.currentView = viewName;
 
       // Ocultar todas las secciones
@@ -3717,17 +3914,34 @@
         targetSec.classList.add('fade-in-slide');
       }
 
-      // Actualizar botones de navegación
+      // Actualizar botones de navegación en header desktop
       ['inicio', 'shop', 'calculadora', 'servicios', 'nosotros'].forEach(item => {
         const btn = document.getElementById('nav-' + item);
         if (btn) {
+          const isDropdown = (item === 'servicios' || item === 'nosotros');
           if (item === viewName) {
-            btn.className = 'px-3.5 py-2 rounded-xl transition-all text-[#002C45] bg-slate-100 font-semibold';
+            btn.className = isDropdown 
+              ? 'px-3.5 py-2 rounded-xl transition-all text-[#002C45] bg-slate-100 font-semibold flex items-center gap-1 cursor-pointer'
+              : 'px-3.5 py-2 rounded-xl transition-all text-[#002C45] bg-slate-100 font-semibold cursor-pointer';
           } else {
-            btn.className = 'px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454]';
+            btn.className = isDropdown
+              ? 'px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] flex items-center gap-1 cursor-pointer'
+              : 'px-3.5 py-2 rounded-xl transition-all hover:text-[#002C45] hover:bg-slate-50 text-[#545454] cursor-pointer';
           }
         }
       });
+
+      // Si se especifica subsección, realizar scroll suave hacia ella
+      if (subSection) {
+        setTimeout(() => {
+          const targetEl = document.getElementById(viewName + '-' + subSection) || document.getElementById(subSection);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 120);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
 
       // Si entra a la calculadora, inicializar presets y sliders
       if (viewName === 'calculadora') {
@@ -3741,8 +3955,36 @@
           }, 150);
         }
       }
+    }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll directo a secciones de Nosotros
+    function scrollToNosotrosSection(secId) {
+      showView('nosotros');
+      setTimeout(() => {
+        const el = document.getElementById(secId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+
+    // Scroll directo a secciones de Servicios
+    function scrollToServiciosSection(secId) {
+      showView('servicios');
+      setTimeout(() => {
+        const el = document.getElementById(secId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+
+    // Acordeones para el menú móvil
+    function toggleMobileSubmenu(submenuId) {
+      const el = document.getElementById(submenuId);
+      if (el) {
+        el.classList.toggle('hidden');
+      }
     }
 
     function toggleMobileNav() {
@@ -6504,12 +6746,30 @@ window.addEventListener('keydown', (e) => {
       } else if (hash === 'chat-open') {
         toggleFaqBot();
         setTimeout(() => triggerBotAnswer('invierno'), 200);
+      } else if (hash.startsWith('nosotros-')) {
+        const sub = hash.replace('nosotros-', '');
+        showView('nosotros', sub);
+      } else if (hash.startsWith('servicios-')) {
+        const sub = hash.replace('servicios-', '');
+        showView('servicios', sub);
       } else if (['shop', 'calculadora', 'servicios', 'nosotros'].includes(hash)) {
         showView(hash);
       } else {
         showView('inicio');
       }
       updateCartBadge();
+    });
+
+    // Soporte para navegación con botones Atrás / Adelante del navegador
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash.startsWith('nosotros-')) {
+        showView('nosotros', hash.replace('nosotros-', ''));
+      } else if (hash.startsWith('servicios-')) {
+        showView('servicios', hash.replace('servicios-', ''));
+      } else if (['shop', 'calculadora', 'servicios', 'nosotros', 'inicio'].includes(hash)) {
+        showView(hash);
+      }
     });
   </script>
 </body>
