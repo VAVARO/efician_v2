@@ -572,10 +572,16 @@ function goBack() {
 }
 
 // -------------------------------------------------------------------------
-// 5. NAVEGACIÓN Y RENDERIZADO DE NOSOTROS & SERVICIOS
+// -------------------------------------------------------------------------
+// 5. NAVEGACIÓN Y RENDERIZADO DE NOSOTROS & SERVICIOS (CON REACCIÓN HOVER)
 // -------------------------------------------------------------------------
 function selectNosotrosSection(subKey) {
   Router.navigate('/nosotros/' + subKey);
+}
+
+function hoverNosotrosSection(subKey) {
+  if (AppState.nosotrosSection === subKey) return;
+  applyNosotrosSectionDom(subKey);
 }
 
 function applyNosotrosSectionDom(subKey) {
@@ -598,69 +604,80 @@ function renderNosotrosContent() {
   const data = NosotrosData[AppState.nosotrosSection];
   if (!data) return;
 
+  // Renderizado limpio sin títulos redundantes repetidos y textos 100% justificados
   if (data.type === 'text') {
     container.innerHTML = `
-      <div class="calc-slide space-y-3">
-        <h3 class="text-xl font-medium text-[#00FFFF] font-balgin">${data.title}</h3>
-        <div class="w-10 h-[1.5px] bg-[#00FFFF]/60 mb-2"></div>
-        <p class="text-xs sm:text-sm text-slate-200 font-light leading-relaxed">
+      <div class="calc-slide p-5 sm:p-6 rounded-2xl ppt-glass-panel-translucent border border-cyan-400/25 shadow-2xl">
+        <div class="w-8 h-[2px] bg-[#00FFFF] mb-3"></div>
+        <p class="text-xs sm:text-sm text-slate-100 font-light leading-relaxed text-justify">
           ${data.text}
         </p>
       </div>
     `;
   } else if (data.type === 'acronym') {
     const itemsHtml = data.items.map((item, idx) => `
-      <div class="stagger-item flex items-start gap-3 p-2 rounded-xl bg-black/35 border border-cyan-500/20" style="animation-delay: ${idx * 45}ms">
-        <div class="w-8 h-8 rounded-lg bg-[#00FFFF]/15 border border-[#00FFFF] text-[#00FFFF] flex items-center justify-center font-medium font-mono text-base shrink-0">
+      <div class="ppt-translucent-bar flex items-start gap-3 p-3 transition-transform" style="animation-delay: ${idx * 30}ms">
+        <div class="w-7 h-7 rounded-lg bg-[#00FFFF]/20 border border-[#00FFFF]/60 text-[#00FFFF] flex items-center justify-center font-mono font-medium text-sm shrink-0">
           ${item.letter}
         </div>
-        <div>
-          <h5 class="text-xs font-medium text-white">${item.word}</h5>
-          <p class="text-[11px] text-slate-300 font-light">${item.desc}</p>
+        <div class="flex-1">
+          <div class="text-xs sm:text-sm font-medium text-white mb-0.5">${item.word}</div>
+          <p class="text-xs text-slate-200 font-light leading-relaxed text-justify">${item.desc}</p>
         </div>
       </div>
     `).join('');
 
     container.innerHTML = `
       <div class="calc-slide space-y-2">
-        <h3 class="text-lg font-medium text-[#00FFFF] font-balgin mb-2">${data.title}</h3>
-        <div class="grid grid-cols-1 gap-1.5 max-h-[360px] overflow-y-auto custom-scrollbar pr-1">
-          ${itemsHtml}
-        </div>
+        ${itemsHtml}
       </div>
     `;
   } else if (data.type === 'ods') {
     const itemsHtml = data.items.map((item, idx) => `
-      <div class="stagger-item flex items-start gap-3 p-2.5 rounded-xl bg-black/35 border border-cyan-500/20" style="animation-delay: ${idx * 45}ms">
-        <div class="w-9 h-9 rounded-lg bg-emerald-500/20 border border-emerald-400 text-emerald-300 flex items-center justify-center font-medium font-mono text-sm shrink-0">
+      <div class="ppt-translucent-bar flex items-start gap-3 p-3 transition-transform" style="animation-delay: ${idx * 30}ms">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-400 text-emerald-300 flex items-center justify-center font-mono font-medium text-sm shrink-0">
           ${item.num}
         </div>
-        <div>
-          <h5 class="text-xs font-medium text-white">${item.title}</h5>
-          <p class="text-[11px] text-slate-300 font-light">${item.desc}</p>
+        <div class="flex-1">
+          <div class="text-xs sm:text-sm font-medium text-white mb-0.5">${item.title}</div>
+          <p class="text-xs text-slate-200 font-light leading-relaxed text-justify">${item.desc}</p>
         </div>
       </div>
     `).join('');
 
     container.innerHTML = `
       <div class="calc-slide space-y-2">
-        <h3 class="text-lg font-medium text-[#00FFFF] font-balgin mb-2">${data.title}</h3>
-        <div class="grid grid-cols-1 gap-2 max-h-[360px] overflow-y-auto custom-scrollbar pr-1">
-          ${itemsHtml}
-        </div>
+        ${itemsHtml}
       </div>
     `;
   }
 
-  setTimeout(() => updateConnectingLines('nosotros'), 60);
+  setTimeout(() => updateConnectingLines('nosotros'), 50);
 }
 
 function selectServiciosSection(subKey) {
   Router.navigate('/servicios/' + subKey);
 }
 
+function hoverServiciosSection(subKey) {
+  if (AppState.serviciosSection === subKey) return;
+  applyServiciosSectionDom(subKey);
+}
+
+function hoverSubService(subId) {
+  if (AppState.selectedSubServiceId === subId) return;
+  AppState.selectedSubServiceId = subId;
+  renderServiciosContent();
+}
+
+function selectSubService(subId) {
+  AppState.selectedSubServiceId = (AppState.selectedSubServiceId === subId) ? null : subId;
+  renderServiciosContent();
+}
+
 function applyServiciosSectionDom(subKey) {
   AppState.serviciosSection = subKey;
+  AppState.selectedSubServiceId = null; // Reiniciar al primer sub-servicio
   document.querySelectorAll('#servicios-menu .subnav-btn').forEach(btn => {
     if (btn.dataset.sub === subKey) {
       btn.classList.add('active');
@@ -679,25 +696,62 @@ function renderServiciosContent() {
   const data = ServiciosData[AppState.serviciosSection];
   if (!data) return;
 
-  // Renderizado limpio de sub-servicios sin botones 'Contratar' dispersos
-  const itemsHtml = data.items.map((item, idx) => `
-    <div class="stagger-item p-2.5 rounded-xl bg-black/40 border border-cyan-500/20 space-y-1" style="animation-delay: ${idx * 40}ms">
-      <h5 class="text-xs font-medium text-[#00FFFF]">${item.name}</h5>
-      <p class="text-[11px] text-slate-300 font-light leading-relaxed">${item.desc}</p>
-    </div>
-  `).join('');
+  // Por defecto, seleccionar el primer sub-servicio si no hay ninguno activo
+  if (!AppState.selectedSubServiceId || !data.items.some(it => it.id === AppState.selectedSubServiceId)) {
+    AppState.selectedSubServiceId = data.items[0].id;
+  }
+
+  // Renderizado dinámico de barras translúcidas con hover instantáneo
+  const itemsHtml = data.items.map((item, idx) => {
+    const isActive = (item.id === AppState.selectedSubServiceId);
+    return `
+      <div class="stagger-item space-y-0" style="animation-delay: ${idx * 30}ms">
+        <div onmouseenter="hoverSubService('${item.id}')"
+             onclick="selectSubService('${item.id}')" 
+             class="ppt-translucent-bar ${isActive ? 'active' : ''} ${isActive ? 'rounded-b-none' : ''}">
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#00FFFF] shadow-[0_0_8px_#00FFFF]' : 'bg-white/40'}"></span>
+            <span class="bar-title text-xs sm:text-sm font-medium ${isActive ? 'text-[#00FFFF]' : 'text-slate-100'}">${item.name}</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-cyan-400 transition-transform ${isActive ? 'rotate-90' : 'opacity-60'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+
+        ${isActive ? `
+          <div class="ppt-detail-drawer space-y-2.5 text-left">
+            <p class="text-xs sm:text-sm text-slate-100 font-light leading-relaxed text-justify">
+              ${item.desc}
+            </p>
+            <div class="pt-1 flex items-center justify-between gap-3">
+              ${item.cta === 'calcular' ? `
+                <button onclick="switchView('calculadora')" class="px-4 py-2 rounded-xl bg-[#00FFFF] hover:bg-white text-[#001D30] font-medium text-xs tracking-wider uppercase transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+                  <span>Haz tu cálculo aquí</span>
+                  <span>➔</span>
+                </button>
+              ` : `
+                <button onclick="openLeadModal('${item.name}')" class="px-4 py-2 rounded-xl bg-[#00FFFF] hover:bg-white text-[#001D30] font-medium text-xs tracking-wider uppercase transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+                  <span>Contrata aquí</span>
+                  <span>➔</span>
+                </button>
+              `}
+              <span class="text-[11px] text-cyan-300/80 font-mono">Ingeniería SEC Aysén</span>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
 
   container.innerHTML = `
     <div class="calc-slide space-y-2">
-      <h3 class="text-lg font-medium text-[#00FFFF] font-balgin mb-2">${data.title}</h3>
-      <div class="space-y-2 max-h-[360px] overflow-y-auto custom-scrollbar pr-1">
-        ${itemsHtml}
-      </div>
+      ${itemsHtml}
     </div>
   `;
 
-  setTimeout(() => updateConnectingLines('servicios'), 60);
+  setTimeout(() => updateConnectingLines('servicios'), 50);
 }
+
 
 // Recreación de Líneas Conectoras Estilo Presentación Oficial EFICIAN
 function updateConnectingLines(viewName) {
@@ -2250,17 +2304,19 @@ function removeCartItem(kitId) {
 
 function updateCartBadge() {
   const count = AppState.cart.reduce((s, i) => s + i.qty, 0);
-  const badge = document.getElementById('cart-counter-badge');
-  if (badge) {
-    badge.textContent = count;
-    if (count > 0) {
-      badge.classList.remove('hidden');
-      badge.classList.add('flex');
-    } else {
-      badge.classList.add('hidden');
-      badge.classList.remove('flex');
+  ['cart-counter-badge', 'cart-counter-badge-mobile'].forEach(id => {
+    const badge = document.getElementById(id);
+    if (badge) {
+      badge.textContent = count;
+      if (count > 0) {
+        badge.classList.remove('hidden');
+        badge.classList.add('flex');
+      } else {
+        badge.classList.add('hidden');
+        badge.classList.remove('flex');
+      }
     }
-  }
+  });
 }
 
 function renderCart() {

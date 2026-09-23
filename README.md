@@ -88,5 +88,5 @@ El proyecto está configurado para ejecutarse de forma 100% estática en el nave
 ---
 
 ## 📄 Licencia y Derechos
-© EFICIAN — Grupo CR SpA. Todos los derechos reservados.
+© EFICIAN SpA. Todos los derechos reservados.
 Patagonia Chilena.
