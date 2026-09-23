@@ -1,18 +1,18 @@
-# EFICIAN // Ingeniería Fotovoltaica Austral
+# EFICIAN // Ingeniería Fotovoltaica Austral (v2)
 
-> Plataforma web interactiva de dimensionamiento solar, catálogo de kits fotovoltaicos con carrito de compra, asistente técnico austral y portal directivo CRM a pantalla completa con exportación nativa a Excel (`.xlsx`). Diseñado y calibrado específicamente para la Región de Aysén y la Patagonia chilena.
+> Plataforma web interactiva de diseño y dimensionamiento solar, catálogo de kits fotovoltaicos con carrito de compra, asistente técnico austral, cálculo satelital HD de techos, enrutador cliente con historial de navegación y portal directivo CRM con exportación nativa a Excel (`.xlsx`). Diseñado y calibrado específicamente para la Región de Aysén y la Patagonia chilena.
 
-[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?style=flat&logo=github)](https://vavaro.github.io/efician/)
-[![Responsive](https://img.shields.io/badge/Mobile-Optimized-brightgreen?style=flat&logo=safari)](https://vavaro.github.io/efician/)
-[![Export to Excel](https://img.shields.io/badge/SheetJS-XLSX%20Export-emerald?style=flat&logo=microsoft-excel)](https://vavaro.github.io/efician/)
+[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?style=flat&logo=github)](https://vavaro.github.io/efician_v2/)
+[![Responsive](https://img.shields.io/badge/Viewport-Locked%20100dvh-brightgreen?style=flat&logo=safari)](https://vavaro.github.io/efician_v2/)
+[![Export to Excel](https://img.shields.io/badge/SheetJS-XLSX%20Export-emerald?style=flat&logo=microsoft-excel)](https://vavaro.github.io/efician_v2/)
 
 ---
 
 ## 📱 Acceso Rápido y Producción
 
-- **URL de Producción (GitHub Pages):** [https://vavaro.github.io/efician/](https://vavaro.github.io/efician/)
+- **URL de Producción (GitHub Pages):** [https://vavaro.github.io/efician_v2/](https://vavaro.github.io/efician_v2/)
 - **Código QR Permanente:** Disponible en `/QR/` para folletería, afiches y stands de ferias en la Patagonia.
-- **Acceso Directo a Socios / CRM:** Botón con candado en el Header o atajo global `Alt + S` (PIN inicial sugerido: `2026`).
+- **Acceso Directo a Socios / CRM:** Atajo global de teclado `Alt + S` o ruta `#/socios` (PIN de seguridad: `2026`).
 
 ---
 

@@ -27,5 +27,6 @@ index_backup.html
 kitsolares_home.html
 scratch_artifact_script.js
 style_*.css
+!style_v2.css
 test_*.html
 logo-efician.webp
